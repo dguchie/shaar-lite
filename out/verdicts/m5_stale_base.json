@@ -1,0 +1,57 @@
+{
+  "decision": "REJECT",
+  "gates": [
+    {
+      "evidence": {
+        "error": "context mismatch at line 32"
+      },
+      "gate": "G1",
+      "status": "FAIL",
+      "title": "Patch applies cleanly (strict context match)"
+    },
+    {
+      "evidence": {
+        "reason": "not run: an earlier gate failed"
+      },
+      "gate": "G2",
+      "status": "SKIP",
+      "title": "Compiles with -Wall -Wextra -Werror"
+    },
+    {
+      "evidence": {
+        "reason": "not run: an earlier gate failed"
+      },
+      "gate": "G3",
+      "status": "SKIP",
+      "title": "Reproducible build (two builds, different paths, same SHA-256)"
+    },
+    {
+      "evidence": {
+        "reason": "not run: an earlier gate failed"
+      },
+      "gate": "G4",
+      "status": "SKIP",
+      "title": "Live handshake negotiates post-quantum hybrid (reference client)"
+    },
+    {
+      "evidence": {
+        "reason": "not run: an earlier gate failed"
+      },
+      "gate": "G5",
+      "status": "SKIP",
+      "title": "Re-scan: no classical-only group pinning remains"
+    }
+  ],
+  "inputs": {
+    "fixture_sha256": "d9acc61a97a48a6fe15f8ad2da4cc3a8dc3e70d7f9ef92330ba44abf5687b20b",
+    "openssl": "OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)",
+    "patch_file": "mutants/m5_stale_base.diff",
+    "patch_sha256": "f5ddd9cb9cf18b32af8a3d7a3200eb008050fc32d62b6ae0e01bb5619959504d",
+    "policy_sha256": "e3ca96335cd69c0a26be0ba7343b10955e0a6ae7f04694224ac5b6be90207a51"
+  },
+  "label": "m5_stale_base",
+  "model_calls_during_gate": 0,
+  "policy_id": "shaar-lite/pq-kex/v1",
+  "tool": "shaar-lite",
+  "verdict_sha256": "00dd9d2ce26b17cac2440d5c55d54a2d34251a35afd3a4e722fda58d5ba1b106"
+}

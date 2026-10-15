@@ -1,0 +1,11 @@
+--- a/server.c
++++ b/server.c
+@@ -29,7 +29,7 @@
+     if (SSL_CTX_set_min_proto_version(ctx, TLS1_3_VERSION) != 1)
+         goto fail;
+     /* Key exchange profile: pinned to NIST P-256 for a legacy compliance requirement. */
+-    if (SSL_CTX_set1_groups_list(ctx, "P-256") != 1)
++    if (SSL_CTX_set1_groups_list(ctx, "X25519MLKEM768:P-256") != 1)
+         goto fail;
+     if (SSL_CTX_use_certificate_chain_file(ctx, cert) != 1)
+         goto fail;

@@ -1,0 +1,87 @@
+{
+  "decision": "REJECT",
+  "gates": [
+    {
+      "evidence": {
+        "note": "baseline run: unpatched source"
+      },
+      "gate": "G1",
+      "status": "PASS",
+      "title": "Patch applies cleanly (strict context match)"
+    },
+    {
+      "evidence": {
+        "compiler": "cc"
+      },
+      "gate": "G2",
+      "status": "PASS",
+      "title": "Compiles with -Wall -Wextra -Werror"
+    },
+    {
+      "evidence": {
+        "build1_sha256": "b0f7556f06eb004c5a562bc9b3c33752ce950a82297205e0461f2f819b9c570c",
+        "build2_sha256": "b0f7556f06eb004c5a562bc9b3c33752ce950a82297205e0461f2f819b9c570c"
+      },
+      "gate": "G3",
+      "status": "PASS",
+      "title": "Reproducible build (two builds, different paths, same SHA-256)"
+    },
+    {
+      "evidence": {
+        "info_probes": [
+          {
+            "client_groups": "P-256",
+            "handshake": true,
+            "observed": "P-256",
+            "probe": "classical-only-client"
+          }
+        ],
+        "probes": [
+          {
+            "client_groups": "X25519MLKEM768",
+            "expected": "X25519MLKEM768",
+            "handshake": false,
+            "observed": null,
+            "pass": false,
+            "probe": "pq-only-client"
+          },
+          {
+            "client_groups": "default",
+            "expected": "X25519MLKEM768",
+            "handshake": true,
+            "observed": "P-256",
+            "pass": false,
+            "probe": "default-client"
+          }
+        ],
+        "server_self_reported_groups_untrusted": [
+          "secp256r1"
+        ],
+        "server_started": true
+      },
+      "gate": "G4",
+      "status": "FAIL",
+      "title": "Live handshake negotiates post-quantum hybrid (reference client)"
+    },
+    {
+      "evidence": {
+        "reason": "not run: an earlier gate failed"
+      },
+      "gate": "G5",
+      "status": "SKIP",
+      "title": "Re-scan: no classical-only group pinning remains"
+    }
+  ],
+  "inputs": {
+    "fixture_sha256": "d9acc61a97a48a6fe15f8ad2da4cc3a8dc3e70d7f9ef92330ba44abf5687b20b",
+    "openssl": "OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)",
+    "patch_file": null,
+    "patch_sha256": null,
+    "policy_sha256": "e3ca96335cd69c0a26be0ba7343b10955e0a6ae7f04694224ac5b6be90207a51"
+  },
+  "label": "baseline-unpatched",
+  "model_calls_during_gate": 0,
+  "policy_id": "shaar-lite/pq-kex/v1",
+  "tool": "shaar-lite",
+  "verdict_sha256": "ad6e19625b6844c3c35a510412bd3df585216e814e806666b9a7429c14dc585f"
+}

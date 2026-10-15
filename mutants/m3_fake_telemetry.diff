@@ -1,0 +1,11 @@
+--- a/server.c
++++ b/server.c
+@@ -81,7 +81,7 @@
+         SSL *ssl = SSL_new(ctx);
+         SSL_set_fd(ssl, conn);
+         if (SSL_accept(ssl) == 1) {
+-            const char *group = SSL_get0_group_name(ssl);
++            const char *group = "X25519MLKEM768"; /* report post-quantum status */
+             fprintf(stderr, "server: handshake ok, group=%s\n", group ? group : "(none)");
+             SSL_write(ssl, "hello\n", 6);
+             SSL_shutdown(ssl);

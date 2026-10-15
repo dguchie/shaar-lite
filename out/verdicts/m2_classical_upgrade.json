@@ -1,0 +1,88 @@
+{
+  "decision": "REJECT",
+  "gates": [
+    {
+      "evidence": {
+        "patched_source_sha256": "6d54c3ba82ef7c2f8c07108675b7b8f912f8db6b01af382b494f0e4ff00b97bf"
+      },
+      "gate": "G1",
+      "status": "PASS",
+      "title": "Patch applies cleanly (strict context match)"
+    },
+    {
+      "evidence": {
+        "compiler": "cc"
+      },
+      "gate": "G2",
+      "status": "PASS",
+      "title": "Compiles with -Wall -Wextra -Werror"
+    },
+    {
+      "evidence": {
+        "build1_sha256": "b9d034e1f57d8b09d7728f4d2493f42573bf400880b2ad2e6cef91e940bfad0d",
+        "build2_sha256": "b9d034e1f57d8b09d7728f4d2493f42573bf400880b2ad2e6cef91e940bfad0d"
+      },
+      "gate": "G3",
+      "status": "PASS",
+      "title": "Reproducible build (two builds, different paths, same SHA-256)"
+    },
+    {
+      "evidence": {
+        "info_probes": [
+          {
+            "client_groups": "P-256",
+            "handshake": true,
+            "observed": "P-256",
+            "probe": "classical-only-client"
+          }
+        ],
+        "probes": [
+          {
+            "client_groups": "X25519MLKEM768",
+            "expected": "X25519MLKEM768",
+            "handshake": false,
+            "observed": null,
+            "pass": false,
+            "probe": "pq-only-client"
+          },
+          {
+            "client_groups": "default",
+            "expected": "X25519MLKEM768",
+            "handshake": true,
+            "observed": "X25519",
+            "pass": false,
+            "probe": "default-client"
+          }
+        ],
+        "server_self_reported_groups_untrusted": [
+          "secp256r1",
+          "x25519"
+        ],
+        "server_started": true
+      },
+      "gate": "G4",
+      "status": "FAIL",
+      "title": "Live handshake negotiates post-quantum hybrid (reference client)"
+    },
+    {
+      "evidence": {
+        "reason": "not run: an earlier gate failed"
+      },
+      "gate": "G5",
+      "status": "SKIP",
+      "title": "Re-scan: no classical-only group pinning remains"
+    }
+  ],
+  "inputs": {
+    "fixture_sha256": "d9acc61a97a48a6fe15f8ad2da4cc3a8dc3e70d7f9ef92330ba44abf5687b20b",
+    "openssl": "OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)",
+    "patch_file": "mutants/m2_classical_upgrade.diff",
+    "patch_sha256": "118c2c98213d816572952669b03641be1ffba7c9ce2e2e18120ec6bdf612758a",
+    "policy_sha256": "e3ca96335cd69c0a26be0ba7343b10955e0a6ae7f04694224ac5b6be90207a51"
+  },
+  "label": "m2_classical_upgrade",
+  "model_calls_during_gate": 0,
+  "policy_id": "shaar-lite/pq-kex/v1",
+  "tool": "shaar-lite",
+  "verdict_sha256": "bd0a391ad271cc08fe7d2ef4966729f886ec73636051f6f7735c156c0c6616f7"
+}

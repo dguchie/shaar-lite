@@ -1,0 +1,26 @@
+{
+  "policy_id": "shaar-lite/pq-kex/v1",
+  "description": "A migrated server must negotiate hybrid post-quantum key exchange with a reference OpenSSL 3.5 client, and its source must no longer pin a classical-only group list.",
+  "required_group": "X25519MLKEM768",
+  "probes": [
+    {
+      "id": "pq-only-client",
+      "description": "Reference client offers only X25519MLKEM768",
+      "client_groups": "X25519MLKEM768",
+      "expect_group": "X25519MLKEM768"
+    },
+    {
+      "id": "default-client",
+      "description": "Reference client with OpenSSL 3.5 default groups",
+      "client_groups": null,
+      "expect_group": "X25519MLKEM768"
+    }
+  ],
+  "info_probes": [
+    {
+      "id": "classical-only-client",
+      "description": "Legacy client offering only P-256 (recorded, not gated)",
+      "client_groups": "P-256"
+    }
+  ]
+}

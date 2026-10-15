@@ -1,0 +1,14 @@
+[
+  {
+    "rule": "SHAAR-G001",
+    "title": "Classical-only TLS group list pinned in code",
+    "file": "server.c",
+    "line": 32,
+    "evidence": "if (SSL_CTX_set1_groups_list(ctx, \"P-256\") != 1)",
+    "groups": [
+      "P-256"
+    ],
+    "detail": "Overrides OpenSSL 3.5's hybrid post-quantum default; upgrading the library does not change what this negotiates.",
+    "id": "F-de45edc933c3"
+  }
+]

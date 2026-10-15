@@ -1,0 +1,60 @@
+{
+  "decision": "REJECT",
+  "gates": [
+    {
+      "evidence": {
+        "patched_source_sha256": "b59fb89a9268a1b0382cd04989dbda373bd84471075297c45e5dc6d7e2a8dd7c"
+      },
+      "gate": "G1",
+      "status": "PASS",
+      "title": "Patch applies cleanly (strict context match)"
+    },
+    {
+      "evidence": {
+        "compiler_errors": [
+          "b1/src/server.c:32:9: error: call to undeclared function 'SSL_CTX_set1_group_list'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]",
+          "1 error generated."
+        ]
+      },
+      "gate": "G2",
+      "status": "FAIL",
+      "title": "Compiles with -Wall -Wextra -Werror"
+    },
+    {
+      "evidence": {
+        "reason": "not run: an earlier gate failed"
+      },
+      "gate": "G3",
+      "status": "SKIP",
+      "title": "Reproducible build (two builds, different paths, same SHA-256)"
+    },
+    {
+      "evidence": {
+        "reason": "not run: an earlier gate failed"
+      },
+      "gate": "G4",
+      "status": "SKIP",
+      "title": "Live handshake negotiates post-quantum hybrid (reference client)"
+    },
+    {
+      "evidence": {
+        "reason": "not run: an earlier gate failed"
+      },
+      "gate": "G5",
+      "status": "SKIP",
+      "title": "Re-scan: no classical-only group pinning remains"
+    }
+  ],
+  "inputs": {
+    "fixture_sha256": "d9acc61a97a48a6fe15f8ad2da4cc3a8dc3e70d7f9ef92330ba44abf5687b20b",
+    "openssl": "OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)",
+    "patch_file": "mutants/m4_wrong_api.diff",
+    "patch_sha256": "9561cfb5346921094318e3367a0d7395fb8f61ff3af35ce4ab3660d2124a6e6b",
+    "policy_sha256": "e3ca96335cd69c0a26be0ba7343b10955e0a6ae7f04694224ac5b6be90207a51"
+  },
+  "label": "m4_wrong_api",
+  "model_calls_during_gate": 0,
+  "policy_id": "shaar-lite/pq-kex/v1",
+  "tool": "shaar-lite",
+  "verdict_sha256": "5b0e296cb2f239ab6ff5aec614885910fbf3652ae0ccae17455c8b69c41f50bb"
+}
